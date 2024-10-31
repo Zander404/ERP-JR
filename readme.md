@@ -40,3 +40,69 @@ Este sistema busca realizar o controle dos recursos de empresas juniores, auxili
     - Calculo de Estimativa de Tempo por Feature
 
 
+
+## Stack utilizada
+
+**Front-end:** NextJS, TailwindCSS, Daisy UI
+
+**Back-end:** Django, Python, Celery, Django Rest Framework
+
+
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+**DJANGO**: 
+`SECRET_KEY`
+`DEBUG`
+`ALLOWED_HOSTS`
+`ENGINE_DB`
+
+**POSTGRES**: 
+`POSTGRES_DB`
+`POSTGRES_USER`
+`POSTGRES_PASSWORD`
+`POSTGRES_HOST`
+`POSTGRES_PORT`
+
+
+## Instalação
+
+Instale o projeto com:
+
+- Linux
+```bash
+  python -m venv .venv
+  source .venv/bin/activate
+  python manage.py runserver 8000
+```
+
+- Windows
+```bash
+  python -m venv .venv
+  .\venv\Scripts\Activate.ps1
+  python manage.py runserver 8000
+  
+```
+
+- Docker
+```bash
+    docker pull zander404/erpjr
+    docker run zander404/erpjr -port 8000
+```
+
+- Docker Compose
+```bash
+    docker compose up
+```
+## Autores
+
+- [@octokatherine](https://www.github.com/octokatherine)
+
+
+## Referência
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
