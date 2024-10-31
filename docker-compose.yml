@@ -1,0 +1,42 @@
+services:
+
+  back:
+    container_name: Back ERPJR
+    command: 'gunicorn app.wsgi -b 0.0.0.0:8000 --reload --workers 2'
+    build: .
+
+    ports:
+      - 8000:8000
+
+    volumes:
+      - ./app:/app/
+
+    env_file:
+      - ./.env
+
+    depends_on:
+      - database
+      - broker
+
+
+  databse:
+    container_name: Postgres ERPJR
+    image: postgres:13
+    ports:
+      - 5432:5432 
+
+    env_file:
+      - ./.env
+
+
+  broker:
+    restart: unless-stopped
+    image: redis:7.0.5-alpine 
+    expose:
+      - 6379
+
+
+
+volumes:
+  litoDB:
+    external: true

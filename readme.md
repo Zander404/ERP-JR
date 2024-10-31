@@ -74,13 +74,15 @@ Instale o projeto com:
 ```bash
   python -m venv .venv
   source .venv/bin/activate
+  pip install -r requirements.txt
   python manage.py runserver 8000
 ```
 
 - Windows
 ```bash
   python -m venv .venv
-  .\venv\Scripts\Activate.ps1
+  pip install -r requirements.txt
+  .\.venv\Scripts\Activate.ps1
   python manage.py runserver 8000
   
 ```
