@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-import uuid 
+import uuid
 from .utils import validation_cpf, cep_format_validator, cnpj_validation, validation_phone
 
 
@@ -10,9 +10,9 @@ class ProjectType(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
-class Adress(models.Model):
+
+
+class Address(models.Model):
     adress = models.CharField(max_length=150)
     city = models.CharField()
     state = models.CharField()
@@ -24,10 +24,14 @@ class Client(models.Model):
     id = models.UUIDField(uuid=uuid.uuid4, editable=False, primary_key=True)
     cpf = models.CharField(max_length=11, validators=[validation_cpf], unique=True)
     rg = models.CharField(max_length=7, validators=[validation_cpf])
+    rg_dispacher = models.CharField(max_length=10)
     fullname = models.CharField(max_length=250, unique=True)
     email = models.EmailField()
     phone = models.CharField(max_length=14, validators=[validation_phone]) 
-    adress = models.ForeignKey(Adress, related_name='adress', on_delete=models.DO_NOTHING)
+    adress = models.ForeignKey(Adress, related_name='address', on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
 
 
 class Company(models.Model):
@@ -35,7 +39,10 @@ class Company(models.Model):
     cnpj = models.CharField(max_length=14, validators=[cnpj_validation], unique=True)
     name = models.CharField(max_length=250, unique=True)
     fantasy_name = models.CharField(max_length=120)
-    address = models.ForeignKey(Adress, related_name='address', on_delete=models.DO_NOTHING)
+    address = models.ForeignKey(Address, related_name='address', on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
 
 
 class Contract(models.Model):
@@ -49,6 +56,9 @@ class Contract(models.Model):
     end_date = models.DateField()
     signed_at = models.BooleanField(default=False)
 
+    def __str__(self):
+        return 'Contrato -' + self.company.name
+
 
 class Proposal(models.Model):
     status_choices = [('wait', 'Esperando Resposta'), ('aproval', 'Aprovado'), ('close', 'Desistiram')]
@@ -60,3 +70,6 @@ class Proposal(models.Model):
     status = models.CharField(max_length=30, choices=[status_choices])
     created_at = models.DateTimeField(auto_created=True)
     update_at = models.DateTimeField(auto_created=True, auto_now_add=True)
+
+    def __str__(self):
+        return 'Proposta - ' + self.company.name
