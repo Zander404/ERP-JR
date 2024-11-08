@@ -1,7 +1,7 @@
 services:
 
   back:
-    container_name: Back ERPJR
+    container_name: Back_ERPJR
     command: 'gunicorn app.wsgi -b 0.0.0.0:8000 --reload --workers 2'
     build: .
 
@@ -9,8 +9,8 @@ services:
       - 8000:8000
 
     volumes:
-      - ./app:/app/
-
+      - ./:/app/
+      - ./entrypoint.sh:/app/entrypoint.sh
     env_file:
       - ./.env
 
@@ -19,8 +19,8 @@ services:
       - broker
 
 
-  databse:
-    container_name: Postgres ERPJR
+  database:
+    container_name: Postgres_ERPJR
     image: postgres:13
     ports:
       - 5432:5432 

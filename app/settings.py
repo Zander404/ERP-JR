@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=0)
 
-ALLOWED_HOSTS = [str(os.environ.get("ALLOWED_HOSTS")).split()]
+ALLOWED_HOSTS = str(os.environ.get("ALLOWED_HOSTS")).split(" ")
 
 
 # Application definition
@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("DB_EGINE")
+        'ENGINE': os.environ.get("DB_ENGINE"),
         'NAME': os.environ.get("DB_NAME"),
         'USER': os.environ.get("DB_USER"),
         'PASSWORD': os.environ.get("DB_PASSWORD"),
@@ -122,6 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
+
+MEDIA_ROOT = 'media/'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

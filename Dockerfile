@@ -16,6 +16,6 @@ COPY ./entrypoint.sh .
 RUN sed -i 's/\r$//g' /app/entrypoint.sh
 RUN chmod 777 /app/entrypoint.sh
 
-COPY ./src .
+COPY . .
 
 ENTRYPOINT [ "/app/entrypoint.sh" ]
